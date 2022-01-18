@@ -1,8 +1,6 @@
-import { Schema, model } from "mongoose";
+const { Schema, model } = require("mongoose");
 
-
-
-const schema = new Schema<ISubject>({
+const schema = new Schema({
   name: {
     type: String,
     unique: true,
@@ -10,4 +8,4 @@ const schema = new Schema<ISubject>({
   },
 });
 
-export default model("Subject", schema);
+module.exports = model("Subject", schema);
