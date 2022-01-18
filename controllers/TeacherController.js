@@ -1,31 +1,44 @@
 const Teacher = require("../models/Teacher");
 
 class TeacherController {
+  
+
+
   async create(req, res) {
     try {
-      const teacherData = req.body;
-      const newTeacher = new Teacher(teacherData);
+      const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(400).json({
+          errors: errors.array(),
+          message: "Wrong data",
+        });
+      }
 
-      await newTeacher.save().catch((error) => {
-        throw error;
+      const { email, password, name, surname, parentName, role } = req.body;
+      const candidate = await Teacher.findOne({ email });
+      if (candidate) {
+        return res.status(400).json({ message: "Email уже зарегистрирован" });
+      }
+
+      if(role !== "DEAN" || role !== "TEACHER"){
+        return res.status(400).json({message: "No such role"})
+      }
+
+      const hashedPassword = bcrypt.hashSync(password, 7);
+      const teacher = new Teacher({
+        email,
+        name,
+        parentName,
+        surname,
+        role,
+        password: hashedPassword,
       });
+      await teacher.save();
 
-      const resBody = {
-        id: newTeacher._id,
-        name: newTeacher.name,
-        surname: newTeacher.surname,
-        parentName: newTeacher.parentName,
-        message: "Учитель успешно создан!",
-      };
-
-      return res.status(200).json(resBody);
+      return res.status(200).json({ message: "Teacher registered successfully" });
     } catch (error) {
-      console.log(error, "Ошибка создания учителя!");
-      const resBody = {
-        error,
-        message: "Ошибка создания учителя!",
-      };
-      return res.status(500).json(resBody);
+      console.log(error);
+      return res.status(400).json({ message: error });
     }
   }
 
