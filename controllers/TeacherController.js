@@ -1,9 +1,6 @@
 const Teacher = require("../models/Teacher");
 
 class TeacherController {
-  
-
-
   async create(req, res) {
     try {
       const errors = validationResult(req);
@@ -20,8 +17,8 @@ class TeacherController {
         return res.status(400).json({ message: "Email уже зарегистрирован" });
       }
 
-      if(role !== "DEAN" || role !== "TEACHER"){
-        return res.status(400).json({message: "No such role"})
+      if (role !== "DEAN" || role !== "TEACHER") {
+        return res.status(400).json({ message: "No such role" });
       }
 
       const hashedPassword = bcrypt.hashSync(password, 7);
@@ -44,8 +41,18 @@ class TeacherController {
 
   async getAll(req, res) {
     try {
-      const resBody = await Teacher.find().catch((error) => {
+      const teachers = await Teacher.find().catch((error) => {
         throw error;
+      });
+
+      resBody = teachers.map((t) => {
+        return {
+          name: t.name,
+          surname: t.surname,
+          parentName: t.parentName,
+          email: t.email,
+          role: t.role === "DEAN" ? "DEAN" : "TEACHER",
+        };
       });
 
       return res.status(200).json(resBody);

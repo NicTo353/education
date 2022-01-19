@@ -62,7 +62,15 @@ class AuthController {
       }
 
       const token = _generateAccessToken(teacher._id, teacher.email, teacher.role);
-      return res.status(200).json({ token, teacherId: teacher._id, role: teacher.role });
+      return res.status(200).json({
+        token,
+        teacherId: teacher._id,
+        name: teacher.name,
+        surname: teacher.surname,
+        parentName: teacher.parentName,
+        email: teacher.email,
+        role: teacher.role,
+      });
     } catch (error) {
       console.log(error);
     }
