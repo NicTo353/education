@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import UserContext from "../../context";
+import AppContext from "../../context";
 import { publicRoutes, teacherRoutes, RouteNames } from "../../routes";
+import Preloader from "../Preloader/Preloader";
 
 const AppRouter = () => {
-  const { token, role } = useContext(UserContext);
+  const { token, isFetching } = useContext(AppContext);
 
   const routesToRouteElements = (routes) => {
     return routes.map((r) => {
@@ -15,7 +16,7 @@ const AppRouter = () => {
   const routes = token ? (
     <Routes>
       {routesToRouteElements(teacherRoutes)}
-      <Route path="*" element={<Navigate to={RouteNames.TEACHERS}/>}/>
+      <Route path="*" element={<Navigate to={RouteNames.TEACHERS} />} />
     </Routes>
   ) : (
     <Routes>
@@ -24,7 +25,7 @@ const AppRouter = () => {
     </Routes>
   );
 
-  return routes;
+  return <>{isFetching ? <Preloader/>  : routes}</>;
 };
 
 export default AppRouter;

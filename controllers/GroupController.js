@@ -1,6 +1,6 @@
 const Group = require("../models/Group");
 
-class GroupController {
+const groupController = {
   async create(req, res) {
     try {
       const groupData = req.body;
@@ -26,7 +26,7 @@ class GroupController {
       };
       return res.status(500).json(resBody);
     }
-  }
+  },
 
   async getAll(req, res) {
     try {
@@ -43,7 +43,7 @@ class GroupController {
       };
       return res.status(500).json(resBody);
     }
-  }
+  },
 
   async getById(req, res) {
     try {
@@ -67,7 +67,7 @@ class GroupController {
       };
       return res.status(500).json(resBody);
     }
-  }
+  },
 
   async deleteOneById(req, res) {
     try {
@@ -86,6 +86,6 @@ class GroupController {
       };
       return res.status(500).json(resBody);
     }
-  }
-}
-module.exports = new GroupController();
+  },
+};
+module.exports = groupController;

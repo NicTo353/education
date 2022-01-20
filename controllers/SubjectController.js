@@ -1,6 +1,6 @@
 const Subject = require("../models/Subject");
 
-class SubjectController {
+const subjectController = {
   async create(req, res) {
     try {
       const subjectData = req.body;
@@ -25,12 +25,19 @@ class SubjectController {
       };
       return res.status(500).json(resBody);
     }
-  }
+  },
 
   async getAll(req, res) {
     try {
-      const resBody = await Subject.find().catch((error) => {
+      const subjects = await Subject.find().catch((error) => {
         throw error;
+      });
+
+      const resBody = subjects.map((s) => {
+        return {
+          name: s.name,
+          id: s._id,
+        };
       });
 
       return res.status(200).json(resBody);
@@ -42,7 +49,7 @@ class SubjectController {
       };
       return res.status(500).json(resBody);
     }
-  }
+  },
 
   async getById(req, res) {
     try {
@@ -65,7 +72,7 @@ class SubjectController {
       };
       return res.status(500).json(resBody);
     }
-  }
+  },
 
   async deleteOneById(req, res) {
     try {
@@ -84,7 +91,7 @@ class SubjectController {
       };
       return res.status(500).json(resBody);
     }
-  }
-}
+  },
+};
 
-module.exports = new SubjectController();
+module.exports = subjectController;

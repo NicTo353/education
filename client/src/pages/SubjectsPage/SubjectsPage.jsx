@@ -20,7 +20,7 @@ const SubjectsPage = (props) => {
     {
       title: "#",
       dataIndex: "index",
-      key: "index",
+      key: "idnex",
     },
     {
       title: "Предмет",

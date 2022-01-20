@@ -5,7 +5,7 @@ export const thunks = {
   submitRegForm:
     ({ email, password, name, surname, parentName }) =>
     async (dispatch) => {
-      API.registration({ email, password, name, surname, parentName })
+      return API.registration({ email, password, name, surname, parentName })
         .then((res) => {
           dispatch(thunks.saveUser(res.data));
           window.location.reload();
@@ -24,7 +24,7 @@ export const thunks = {
   submitLoginForm:
     ({ email, password }) =>
     async (dispatch) => {
-      API.login({ email, password })
+      return API.login({ email, password })
         .then((res) => {
           dispatch(thunks.saveUser(res.data));
           window.location.reload();
@@ -53,10 +53,8 @@ export const thunks = {
     localStorage.removeItem("userData");
   },
 
-  updateAll: () => (dispatch) => {},
-
   updateTeachers: () => async (dispatch) => {
-    API.getTeachers()
+    return API.getTeachers()
       .then((res) => {
         dispatch(allActionCreators.setTeachers(res.data));
       })
@@ -66,7 +64,7 @@ export const thunks = {
   },
 
   updateSubjects: () => async (dispatch) => {
-    API.getSubjects()
+    return API.getSubjects()
       .then((res) => {
         dispatch(allActionCreators.setSubjects(res.data));
       })
@@ -76,7 +74,7 @@ export const thunks = {
   },
 
   updateStudents: () => async (dispatch) => {
-    API.getStudents()
+    return API.getStudents()
       .then((res) => {
         dispatch(allActionCreators.setStudents(res.data));
       })
@@ -86,12 +84,23 @@ export const thunks = {
   },
 
   updateGroups: () => async (dispatch) => {
-    API.getGroups()
+    return API.getGroups()
       .then((res) => {
         dispatch(allActionCreators.setGroups(res.data));
+        return res.data;
       })
       .catch((error) => {
         console.log(error);
       });
+  },
+
+  updateAll: () => async (dispatch) => {
+    console.log("all");
+    return Promise.all([
+      dispatch(thunks.updateGroups()),
+      dispatch(thunks.updateStudents()),
+      dispatch(thunks.updateSubjects()),
+      dispatch(thunks.updateTeachers()),
+    ]);
   },
 };

@@ -10,7 +10,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   clear: allActionCreators.clearLoginForm,
   changeField: allActionCreators.changeLoginFormField,
-  submit: thunks.lo
+  submit: thunks.submitLoginForm
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

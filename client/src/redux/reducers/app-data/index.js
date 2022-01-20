@@ -6,8 +6,6 @@ const initialState = {
   subjects: [],
   groups: [],
   schedules: [],
-
-  isFetching: false,
 };
 
 function appDataReducer(state = initialState, action) {
