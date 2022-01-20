@@ -1,4 +1,5 @@
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button } from "antd";
+import Title from "antd/lib/typography/Title";
 import { Link } from "react-router-dom";
 import { RouteNames } from "../../routes";
 
@@ -11,13 +12,21 @@ const LoginPage = () => {
     console.log("Failed:", errorInfo);
   };
 
+  const formItemLayout = {
+    labelCol: { span: 3 },
+    wrapperCol: { span: 21 },
+  };
+
   return (
     <div
       style={{ minHeight: "80vh", display: "flex", justifyContent: "center", alignItems: "center" }}
     >
-      <div style={{ maxWidth: "600px", flex: "1 0 300px", margin: "0 auto" }}>
+      <div style={{ maxWidth: "600px", flex: "1 0 300px", margin: "0 auto"}}>
+        <Title style={{ textAlign: "center" }}>Авторизация</Title>
+
         <Form
-          name="basic"
+          {...formItemLayout}
+          name="login"
           initialValues={{
             remember: true,
           }}
@@ -51,13 +60,18 @@ const LoginPage = () => {
             <Input.Password minLength={8} />
           </Form.Item>
 
-          <Form.Item style={{textAlign: "center"}}>
+          <Form.Item
+
+            wrapperCol={{ span: 24 }}
+            style={{ textAlign: "center" }}
+          >
             <Button type="primary" htmlType="submit">
               Войти
             </Button>
-            <Link style={{marginLeft: "20px"}} to={RouteNames.REGISTRATION}>Нет аккаунта?</Link>
+            <Link style={{ marginLeft: "20px" }} to={RouteNames.REGISTRATION}>
+              Нет аккаунта?
+            </Link>
           </Form.Item>
-
         </Form>
       </div>
     </div>

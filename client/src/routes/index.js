@@ -1,5 +1,5 @@
-import LoginPage from "../pages/LoginPage/LoginPage";
-import RegPage from "../pages/RegPage/RegPage";
+import LoginPageContainer from "../pages/LoginPage/LoginPageContainer";
+import RegPageContainer from "../pages/RegPage/RegPageContainer";
 import SchedulesPage from "../pages/SchedulesPage/SchedulesPage";
 import StudentsPage from "../pages/StudentsPage/StudentsPage";
 import SubjectsPage from "../pages/SubjectsPage/SubjectsPage";
@@ -16,8 +16,8 @@ export const RouteNames = {
 };
 
 export const publicRoutes = [
-  { path: RouteNames.REGISTRATION, element: RegPage },
-  { path: RouteNames.LOGIN, element: LoginPage },
+  { path: RouteNames.REGISTRATION, element: RegPageContainer },
+  { path: RouteNames.LOGIN, element: LoginPageContainer },
 ];
 
 export const teacherRoutes = [
