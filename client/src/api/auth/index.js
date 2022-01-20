@@ -12,6 +12,8 @@ const authAPI = {
   registration: ({ password, email, name, surname, parentName }) => {
     return _api.post("/registration", { password, email, name, surname, parentName });
   },
+
+  
 };
 
 export default authAPI;

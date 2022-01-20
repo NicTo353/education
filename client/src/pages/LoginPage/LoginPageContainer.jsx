@@ -1,8 +1,16 @@
 import { connect } from "react-redux";
+import { allActionCreators } from "../../redux/actions";
+import { thunks } from "../../redux/thunks";
 import LoginPage from "./LoginPage";
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  ...state.loginForm,
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  clear: allActionCreators.clearLoginForm,
+  changeField: allActionCreators.changeLoginFormField,
+  submit: thunks.lo
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

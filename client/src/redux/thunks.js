@@ -8,11 +8,35 @@ export const thunks = {
       return API.registration({ email, password, name, surname, parentName })
         .then((res) => {
           dispatch(thunks.saveUser(res.data));
-          dispatch(allActionCreators.clearRegForm());
+          window.location.reload();
         })
         .catch((error) => {
           console.log(error);
-          dispatch(allActionCreators.changeRegFormField("message", "Ошибка!"));
+          const message = error.response.data.message;
+          if (message) {
+            dispatch(allActionCreators.setRegFormMessage(message));
+          } else {
+            dispatch(allActionCreators.setRegFormMessage("Ошибка!"));
+          }
+        });
+    },
+
+  submitLoginForm:
+    ({ email, password }) =>
+    (dispatch) => {
+      return API.login({ email, password })
+        .then((res) => {
+          dispatch(thunks.saveUser(res.data));
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log(error);
+          const message = error.response.data.message;
+          if (message) {
+            dispatch(allActionCreators.setLoginFormMessage(message));
+          } else {
+            dispatch(allActionCreators.setLoginFormMessage("Ошибка!"));
+          }
         });
     },
 

@@ -6,10 +6,9 @@ import Title from "antd/lib/typography/Title";
 
 const RegPage = (props) => {
   const { email, password, name, surname, parentName, clear, changeField, submit, message } = props;
-  console.log(props);
 
   const onFinish = (values) => {
-    submit(values)
+    submit(values);
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -17,7 +16,6 @@ const RegPage = (props) => {
   };
 
   const inputHandler = (event) => {
-    console.log(event);
     changeField(event.target.name, event.target.value);
   };
 
@@ -27,10 +25,22 @@ const RegPage = (props) => {
   };
   return (
     <div
-      style={{ minHeight: "80vh", display: "flex", justifyContent: "center", alignItems: "center" }}
+      style={{
+        minHeight: "80vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
     >
       <div style={{ maxWidth: "600px", flex: "1 0 300px", margin: "0 auto" }}>
-        <Title style={{ textAlign: "center" }}>Регистрация</Title>
+        <Form.Item wrapperCol={{ span: 20, offset: 4 }}>
+          <Title span={10} style={{ textAlign: "center" }}>
+            Регистрация
+          </Title>
+          <Title level={3} style={{ textAlign: "center", color: "red" }}>
+            {message}
+          </Title>
+        </Form.Item>
 
         <Form
           {...formItemLayout}

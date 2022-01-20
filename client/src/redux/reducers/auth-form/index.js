@@ -1,27 +1,24 @@
-import { RegFormActionTypes } from "./actions";
+import { LoginFormActionTypes } from "./actions";
 
 const initialState = {
   email: "",
   password: "",
-  name: "",
-  surname: "",
-  parentName: "",
 
   message: "",
 };
 
-function regFromReducer(state = initialState, action) {
+function loginFromReducer(state = initialState, action) {
   switch (action.type) {
-    case RegFormActionTypes.CLEAR_REG_FORM:
+    case LoginFormActionTypes.CLEAR_LOGIN_FORM:
       return initialState;
 
-    case RegFormActionTypes.CHANGE_REG_FORM_FIELD:
+    case LoginFormActionTypes.CHANGE_LOGIN_FORM_FIELD:
       return {
         ...state,
         [action.payload.name]: action.payload.value,
       };
 
-    case RegFormActionTypes.SET_REG_FORM_MESSAGE:
+    case LoginFormActionTypes.SET_LOGIN_FORM_MESSAGE:
       return {
         ...state,
         message: action.payload.message,
@@ -32,4 +29,4 @@ function regFromReducer(state = initialState, action) {
   }
 }
 
-export default regFromReducer;
+export default loginFromReducer;

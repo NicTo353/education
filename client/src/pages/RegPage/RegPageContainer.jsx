@@ -10,7 +10,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = {
   clear: allActionCreators.clearRegForm,
   changeField: allActionCreators.changeRegFormField,
-  submit: thunks.submitRegForm
+  submit: thunks.submitRegForm,
+  
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegPage);
