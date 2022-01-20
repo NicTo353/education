@@ -1,6 +1,6 @@
 const Teacher = require("../models/Teacher");
 
-class TeacherController {
+const teacherController = {
   async create(req, res) {
     try {
       const errors = validationResult(req);
@@ -37,7 +37,7 @@ class TeacherController {
       console.log(error);
       return res.status(400).json({ message: error });
     }
-  }
+  },
 
   async getAll(req, res) {
     try {
@@ -45,8 +45,9 @@ class TeacherController {
         throw error;
       });
 
-      resBody = teachers.map((t) => {
+      const resBody = teachers.map((t) => {
         return {
+          id: t._id,
           name: t.name,
           surname: t.surname,
           parentName: t.parentName,
@@ -64,7 +65,7 @@ class TeacherController {
       };
       return res.status(500).json(resBody);
     }
-  }
+  },
 
   async getById(req, res) {
     try {
@@ -89,7 +90,7 @@ class TeacherController {
       };
       return res.status(500).json(resBody);
     }
-  }
+  },
 
   async deleteOneById(req, res) {
     try {
@@ -108,7 +109,7 @@ class TeacherController {
       };
       return res.status(500).json(resBody);
     }
-  }
-}
+  },
+};
 
-module.exports = new TeacherController();
+module.exports = teacherController;

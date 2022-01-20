@@ -4,7 +4,9 @@ import { RouteNames } from "../../routes";
 
 const Nav = () => {
   return (
-    <Menu theme="dark"  mode="horizontal">
+    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+      <div style={{color: '#fff', fontSize: "20px"}}>LOGO</div>
+    <Menu theme="dark" mode="horizontal">
       <Menu.Item key={RouteNames.STUDENTS}>
         <Link to={RouteNames.STUDENTS}>Студенты</Link>
       </Menu.Item>
@@ -17,7 +19,12 @@ const Nav = () => {
       <Menu.Item key={RouteNames.SCHEDULES}>
         <Link to={RouteNames.SCHEDULES}>Расписания</Link>
       </Menu.Item>
+      <Menu.Item key={RouteNames.GROUPS}>
+        <Link to={RouteNames.GROUPS}>Группы</Link>
+      </Menu.Item>
     </Menu>
+    </div>
+
   );
 };
 

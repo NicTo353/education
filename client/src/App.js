@@ -4,9 +4,7 @@ import Nav from "./components/Nav/Nav";
 import "./App.css";
 import React from "react";
 
-
 function App() {
-
   return (
     <div className="App">
       <Layout hasSider={false}>

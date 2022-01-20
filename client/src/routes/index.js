@@ -1,9 +1,10 @@
+import GroupsPageContainer from "../pages/GroupsPage/GroupsPageContainer";
 import LoginPageContainer from "../pages/LoginPage/LoginPageContainer";
 import RegPageContainer from "../pages/RegPage/RegPageContainer";
-import SchedulesPage from "../pages/SchedulesPage/SchedulesPage";
-import StudentsPage from "../pages/StudentsPage/StudentsPage";
-import SubjectsPage from "../pages/SubjectsPage/SubjectsPage";
-import TeachersPage from "../pages/TeachersPage/TeachersPage";
+import SchedulesPageContainer from "../pages/SchedulesPage/SchedulesPageContainer";
+import StudentsPageContainer from "../pages/StudentsPage/StudentsPageContainer";
+import SubjectsPageContainer from "../pages/SubjectsPage/SubjectsPageContainer";
+import TeachersPageContainer from "../pages/TeachersPage/TeachersPageContainer";
 
 export const RouteNames = {
   TEACHERS: "/teachers",
@@ -21,8 +22,9 @@ export const publicRoutes = [
 ];
 
 export const teacherRoutes = [
-  { path: RouteNames.TEACHERS, element: TeachersPage },
-  { path: RouteNames.SCHEDULES, element: SchedulesPage },
-  { path: RouteNames.SUBJECTS, element: SubjectsPage },
-  { path: RouteNames.STUDENTS, element: StudentsPage },
+  { path: RouteNames.TEACHERS, element: TeachersPageContainer },
+  { path: RouteNames.SCHEDULES, element: SchedulesPageContainer },
+  { path: RouteNames.SUBJECTS, element: SubjectsPageContainer },
+  { path: RouteNames.STUDENTS, element: StudentsPageContainer },
+  { path: RouteNames.GROUPS, element: GroupsPageContainer },
 ];

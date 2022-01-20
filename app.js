@@ -6,10 +6,12 @@ const groupRouter = require("./routers/groupRouter");
 const studentRouter = require("./routers/studentRouter");
 const subjectRouter = require("./routers/subjectRouter");
 const scheduleRouter = require("./routers/scheduleRouter");
+const authRouter = require("./routers/authRouter");
 
 const app = express();
 
 app.use(express.json());
+app.use("/api/auth", authRouter);
 app.use("/api/teacher", teacherRouter);
 app.use("/api/group", groupRouter);
 app.use("/api/student", studentRouter);

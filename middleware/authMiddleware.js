@@ -12,9 +12,6 @@ module.exports = function (req, res, next) {
     }
     const decodedData = jwt.verify(token, secret);
     res.user = decodedData;
-    if (decodedData.id !== req.params.userId) {
-      return res.status(403).json({ message: "Вы не авторизованы!" });
-    }
 
     next();
   } catch (error) {

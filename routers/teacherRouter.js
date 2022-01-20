@@ -1,5 +1,5 @@
 const express = require("express");
-const controller = require("../controllers/TeacherController");
+const controller = require("../controllers/teacherController");
 const authMiddleware = require("../middleware/authMiddleware");
 const isDeanMiddleware = require("../middleware/isDeanMiddleware");
 

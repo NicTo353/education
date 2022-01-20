@@ -4,8 +4,8 @@ import { allActionCreators } from "./actions";
 export const thunks = {
   submitRegForm:
     ({ email, password, name, surname, parentName }) =>
-    (dispatch) => {
-      return API.registration({ email, password, name, surname, parentName })
+    async (dispatch) => {
+      API.registration({ email, password, name, surname, parentName })
         .then((res) => {
           dispatch(thunks.saveUser(res.data));
           window.location.reload();
@@ -23,8 +23,8 @@ export const thunks = {
 
   submitLoginForm:
     ({ email, password }) =>
-    (dispatch) => {
-      return API.login({ email, password })
+    async (dispatch) => {
+      API.login({ email, password })
         .then((res) => {
           dispatch(thunks.saveUser(res.data));
           window.location.reload();
@@ -51,5 +51,47 @@ export const thunks = {
   forgetUser: () => (dispatch) => {
     dispatch(allActionCreators.clearUserData());
     localStorage.removeItem("userData");
+  },
+
+  updateAll: () => (dispatch) => {},
+
+  updateTeachers: () => async (dispatch) => {
+    API.getTeachers()
+      .then((res) => {
+        dispatch(allActionCreators.setTeachers(res.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  updateSubjects: () => async (dispatch) => {
+    API.getSubjects()
+      .then((res) => {
+        dispatch(allActionCreators.setSubjects(res.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  updateStudents: () => async (dispatch) => {
+    API.getStudents()
+      .then((res) => {
+        dispatch(allActionCreators.setStudents(res.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  updateGroups: () => async (dispatch) => {
+    API.getGroups()
+      .then((res) => {
+        dispatch(allActionCreators.setGroups(res.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
