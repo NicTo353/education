@@ -1,6 +1,6 @@
 const Student = require("../models/Student");
 
-class StudentController {
+const studentController = {
   async create(req, res) {
     try {
       const studentData = req.body;
@@ -29,7 +29,7 @@ class StudentController {
       };
       return res.status(500).json(resBody);
     }
-  }
+  },
 
   async getAll(req, res) {
     try {
@@ -46,7 +46,7 @@ class StudentController {
       };
       return res.status(500).json(resBody);
     }
-  }
+  },
 
   async getById(req, res) {
     try {
@@ -73,7 +73,7 @@ class StudentController {
       };
       return res.status(500).json(resBody);
     }
-  }
+  },
 
   async deleteOneById(req, res) {
     try {
@@ -92,7 +92,7 @@ class StudentController {
       };
       return res.status(500).json(resBody);
     }
-  }
-}
+  },
+};
 
-module.exports = new StudentController();
+module.exports = studentController;

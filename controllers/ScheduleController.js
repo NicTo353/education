@@ -1,6 +1,6 @@
 const Schedule = require("../models/Schedule");
 
-class ScheduleController {
+const scheduleController = {
   async create(req, res) {
     try {
       const scheduleData = req.body;
@@ -27,7 +27,7 @@ class ScheduleController {
       };
       return res.status(500).json(resBody);
     }
-  }
+  },
 
   async getAll(req, res) {
     try {
@@ -44,7 +44,7 @@ class ScheduleController {
       };
       return res.status(500).json(resBody);
     }
-  }
+  },
 
   async getById(req, res) {
     try {
@@ -69,7 +69,7 @@ class ScheduleController {
       };
       return res.status(500).json(resBody);
     }
-  }
+  },
 
   async deleteOneById(req, res) {
     try {
@@ -88,7 +88,7 @@ class ScheduleController {
       };
       return res.status(500).json(resBody);
     }
-  }
-}
+  },
+};
 
-module.exports = new ScheduleController();
+module.exports = scheduleController;
