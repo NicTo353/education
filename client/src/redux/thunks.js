@@ -60,6 +60,9 @@ export const thunks = {
       })
       .catch((error) => {
         console.log(error);
+        if (error.response.status === 403) {
+          dispatch(thunks.forgetUser());
+        }
       });
   },
 
@@ -70,6 +73,9 @@ export const thunks = {
       })
       .catch((error) => {
         console.log(error);
+        if (error.response.status === 403) {
+          dispatch(thunks.forgetUser());
+        }
       });
   },
 
@@ -80,6 +86,9 @@ export const thunks = {
       })
       .catch((error) => {
         console.log(error);
+        if (error.response.status === 403) {
+          dispatch(thunks.forgetUser());
+        }
       });
   },
 
@@ -90,12 +99,14 @@ export const thunks = {
         return res.data;
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response);
+        if (error.response.status === 403) {
+          dispatch(thunks.forgetUser());
+        }
       });
   },
 
   updateAll: () => async (dispatch) => {
-    console.log("all");
     return Promise.all([
       dispatch(thunks.updateGroups()),
       dispatch(thunks.updateStudents()),
@@ -103,4 +114,12 @@ export const thunks = {
       dispatch(thunks.updateTeachers()),
     ]);
   },
+
+  submitAddScheduleForm:
+    ({ slots, name, groupId }) =>
+    async (dispatch) => {
+      return API.createSchedule({ slots, name, groupId }).catch((error) => {
+        console.log(error);
+      });
+    },
 };

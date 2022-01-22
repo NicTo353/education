@@ -7,11 +7,6 @@ const schema = new Schema({
     unique: true,
   },
 
-  content: {
-    type: Object,
-    required: true,
-  },
-
   groupId: {
     type: Types.ObjectId,
     ref: "Group",

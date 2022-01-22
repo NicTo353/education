@@ -1,4 +1,4 @@
-import axiosInstance from "./axios-instance";
+import axiosInstance from "../axios-instance";
   
 const authAPI = {
   login: ({ email, password }) => {
@@ -10,4 +10,4 @@ const authAPI = {
   },
 };
 
-export default authAPI;
+export default authAPI; 

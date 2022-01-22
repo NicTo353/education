@@ -16,6 +16,6 @@ module.exports = function (req, res, next) {
     next();
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error, message: "Ошибка проверки авторизации!" });
+    return res.status(403).json({ error, message: "Ошибка проверки авторизации!" });
   }
 };

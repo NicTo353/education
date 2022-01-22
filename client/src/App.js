@@ -8,9 +8,7 @@ import { thunks } from "./redux/thunks";
 import AppContext from "./context";
 
 function App() {
-  useEffect(() => {
-    dispatch(thunks.updateAll());
-  }, []);
+
 
   const state = store.getState();
 

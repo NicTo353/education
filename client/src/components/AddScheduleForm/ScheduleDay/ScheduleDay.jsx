@@ -3,17 +3,20 @@ import React from "react";
 import ScheduleSlot from "./ScheduleSlot/ScheduleSlot";
 
 const ScheduleDay = (props) => {
-  const { id, name, slots, slotsTime, teachers, subjects } = props;
-  console.log(slots);
+  const { day, slots, teachers, subjects, changeSlotField } = props;
   return (
     <div>
-      <Title level={3}>{name}</Title>
+      <Title level={3}>{day}</Title>
 
       {slots.map((s) => {
-        const time = slotsTime.find((st) => st.id === s.id).time;
-
         return (
-          <ScheduleSlot teachers={teachers} subjects={subjects} dayId={id} time={time} {...s} />
+          <ScheduleSlot
+            changeField={changeSlotField}
+            key={s.lessonNumber}
+            teachers={teachers}
+            subjects={subjects}
+            {...s}
+          />
         );
       })}
     </div>

@@ -1,4 +1,4 @@
-import axiosInstance from "./axios-instance";
+import axiosInstance from "../axios-instance";
 
 const groupAPI = {
   getGroups: (id = "") => {

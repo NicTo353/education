@@ -1,12 +1,12 @@
-const AddScheduleFormActionTypes = {
+export const AddScheduleFormActionTypes = {
   RESET_ADD_SCHEDULE_FORM: "RESET_ADD_SCHEDULE_FORM",
   CHANGE_ADD_SCHEDULE_FORM_TOP_LEVEL_FIELD: "CHANGE_ADD_SCHEDULE_FORM_TOP_LEVEL_FIELD",
   CHANGE_SLOT_FIELD_BY_WEEK_DAY_AND_LESSON_NUMBERS:
     "CHANGE_SLOT_FIELD_BY_WEEK_DAY_AND_LESSON_NUMBERS",
 };
 
-const AddScheduleFormActionCreators = {
-  clearAddScheduleForm: () => ({
+export const AddScheduleFormActionCreators = {
+  resetAddScheduleForm: () => ({
     type: AddScheduleFormActionTypes.RESET_ADD_SCHEDULE_FORM,
   }),
 
@@ -18,11 +18,13 @@ const AddScheduleFormActionCreators = {
     },
   }),
 
-  changeSlotFieldByWeekDayAndLessonNumbers: ({ weekDayNumber, lessonNumber }) => ({
+  changeSlotFieldByWeekDayAndLessonNumbers: ({ weekDayNumber, lessonNumber, name, value }) => ({
     type: AddScheduleFormActionTypes.CHANGE_SLOT_FIELD_BY_WEEK_DAY_AND_LESSON_NUMBERS,
     payload: {
       weekDayNumber,
       lessonNumber,
+      name,
+      value,
     },
   }),
 };

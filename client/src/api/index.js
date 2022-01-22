@@ -1,8 +1,9 @@
-import authAPI from "./auth";
-import groupAPI from "./groups";
-import studentAPI from "./student";
-import subjectAPI from "./subject";
-import teacherAPI from "./teacher";
+import authAPI from "./paths/auth";
+import groupAPI from "./paths/group";
+import scheduleAPI from "./paths/schedule";
+import studentAPI from "./paths/student";
+import subjectAPI from "./paths/subject";
+import teacherAPI from "./paths/teacher";
 
 const API = {
   ...authAPI,
@@ -10,6 +11,7 @@ const API = {
   ...subjectAPI,
   ...studentAPI,
   ...groupAPI,
+  ...scheduleAPI
 };
 
 export default API;

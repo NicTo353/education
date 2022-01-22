@@ -30,7 +30,16 @@ const groupController = {
 
   async getAll(req, res) {
     try {
-      const resBody = await Group.find().catch((error) => {
+      const resBody = await Group.find().then(data => {
+        return data.map(g => {
+          const {name, _id, course} = g
+          return {
+            name,
+            course,
+            id: _id
+          }
+        })
+      }).catch((error) => {
         throw error;
       });
 
