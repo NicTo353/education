@@ -1,7 +1,7 @@
 import { Select } from "antd";
 import React from "react";
 
-const ScheduleSlot = (props) => {
+const ScheduleSlotForm = (props) => {
   const {
     lessonNumber,
     subjectId,
@@ -20,11 +20,6 @@ const ScheduleSlot = (props) => {
   const subjectSelectHandler = (value) => {
     changeField({ name: "subjectId", lessonNumber, weekDayNumber, value });
   };
-
-  if(lessonNumber === 1){
-  console.log(props);
-
-  }
 
   const teachersOptions = teachers.map((t) => {
     return (
@@ -61,6 +56,7 @@ const ScheduleSlot = (props) => {
           placeholder="Выберите учителя"
           style={{ width: "100%" }}
         >
+          <Select.Option value={null}></Select.Option>
           {teachersOptions}
         </Select>
       </div>
@@ -72,6 +68,7 @@ const ScheduleSlot = (props) => {
           placeholder="Выберите предмет"
           style={{ width: "100%" }}
         >
+          <Select.Option value={null}></Select.Option>
           {subjectsOptions}
         </Select>
       </div>
@@ -79,4 +76,4 @@ const ScheduleSlot = (props) => {
   );
 };
 
-export default ScheduleSlot;
+export default ScheduleSlotForm;

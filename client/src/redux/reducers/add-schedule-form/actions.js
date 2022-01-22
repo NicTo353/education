@@ -5,7 +5,7 @@ export const AddScheduleFormActionTypes = {
     "CHANGE_SLOT_FIELD_BY_WEEK_DAY_AND_LESSON_NUMBERS",
 };
 
-export const AddScheduleFormActionCreators = {
+export const addScheduleFormActionCreators = {
   resetAddScheduleForm: () => ({
     type: AddScheduleFormActionTypes.RESET_ADD_SCHEDULE_FORM,
   }),

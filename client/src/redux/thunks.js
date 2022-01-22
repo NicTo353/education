@@ -106,6 +106,16 @@ export const thunks = {
       });
   },
 
+  updateSchedules: () => async (dispatch) => {
+    return API.getSchedules()
+      .then((res) => {
+        dispatch(allActionCreators.setSchedules(res.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
   updateAll: () => async (dispatch) => {
     return Promise.all([
       dispatch(thunks.updateGroups()),
@@ -118,8 +128,25 @@ export const thunks = {
   submitAddScheduleForm:
     ({ slots, name, groupId }) =>
     async (dispatch) => {
-      return API.createSchedule({ slots, name, groupId }).catch((error) => {
+      return API.createSchedule({ slots, name, groupId })
+        .then((res) => {
+          dispatch(allActionCreators.resetAddScheduleForm());
+          dispatch(thunks.updateSchedules());
+          return res;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
+  updateSingleSchedulePageSlots: (scheduleId) => async (dispatch) => {
+    return API.getSchedules(scheduleId)
+      .then((res) => {
+        console.log(res.data, "data");
+        dispatch(allActionCreators.setSingleScheduleData(res.data));
+      })
+      .catch((error) => {
         console.log(error);
       });
-    },
+  },
 };

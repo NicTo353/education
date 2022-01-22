@@ -1,10 +1,11 @@
 import {
-  AddScheduleFormActionCreators,
+  addScheduleFormActionCreators,
   AddScheduleFormActionTypes,
 } from "./reducers/add-schedule-form/actions";
 import { AppDataActionTypes, appDataAtionCreators } from "./reducers/app-data/actions";
 import { loginFormActionCreators, LoginFormActionTypes } from "./reducers/auth-form/actions";
 import { regFormActionCreators, RegFormActionTypes } from "./reducers/reg-form/actions";
+import { singleSchedulePageActinCreators, SingleSchedulePageActionNames } from "./reducers/single-schedule-page/actions";
 import { userActionCreators, UserActionTypes } from "./reducers/user/actions";
 
 export const AllActionTypes = {
@@ -13,6 +14,7 @@ export const AllActionTypes = {
   ...LoginFormActionTypes,
   ...AppDataActionTypes,
   ...AddScheduleFormActionTypes,
+  ...SingleSchedulePageActionNames
 };
 
 export const allActionCreators = {
@@ -20,5 +22,6 @@ export const allActionCreators = {
   ...userActionCreators,
   ...loginFormActionCreators,
   ...appDataAtionCreators,
-  ...AddScheduleFormActionCreators,
+  ...addScheduleFormActionCreators,
+  ...singleSchedulePageActinCreators
 };

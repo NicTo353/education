@@ -40,6 +40,12 @@ function appDataReducer(state = initialState, action) {
         groups: action.payload.groups,
       };
 
+    case AppDataActionTypes.SET_SCHEDULES:
+      return {
+        ...state,
+        schedules: action.payload.schedules
+      }
+
     default:
       return state;
   }

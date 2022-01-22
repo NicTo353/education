@@ -6,7 +6,6 @@ import { RouteNames } from "../../routes";
 const LoginPage = (props) => {
   const { email, password, message, changeField, clear, submit } = props;
   const onFinish = (values) => {
-    console.log("Success:", values);
     submit(values);
   };
 

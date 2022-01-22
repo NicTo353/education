@@ -1,20 +1,31 @@
 const Schedule = require("../models/Schedule");
+const Slot = require("../models/Slot");
 
 const scheduleController = {
   async create(req, res) {
     try {
-      const scheduleData = req.body;
-      const newSchedule = new Schedule(scheduleData);
+      const { slots, name, groupId } = req.body;
+      const newSchedule = await new Schedule({ name, groupId });
 
       await newSchedule.save().catch((error) => {
         throw error;
       });
 
+      const { _id } = newSchedule;
+
+      const preparedSlots = slots.map((s) => {
+        return {
+          ...s,
+          groupId,
+          scheduleId: _id,
+        };
+      });
+
+      await Slot.insertMany(preparedSlots).catch((error) => {
+        throw error;
+      });
+
       const resBody = {
-        id: newSchedule._id,
-        name: newSchedule.name,
-        content: newSchedule.content,
-        groupId: newSchedule.groupId,
         message: "Расписание успешно создано!",
       };
 
@@ -31,16 +42,28 @@ const scheduleController = {
 
   async getAll(req, res) {
     try {
-      const resBody = await Schedule.find().catch((error) => {
-        throw error;
-      });
+      const schedules = await Schedule.find()
+        .then((res) => {
+          return res.map((s) => {
+            const { _id, name, groupId } = s;
 
-      return res.status(200).json(resBody);
+            return {
+              id: _id,
+              name,
+              groupId,
+            };
+          });
+        })
+        .catch((error) => {
+          throw error;
+        });
+
+      return res.status(200).json(schedules);
     } catch (error) {
-      console.log(error, "Ошибка получения студентов!");
+      console.log(error, "Ошибка получения расписаний!");
       const resBody = {
         error,
-        message: "Ошибка получения студентов!",
+        message: "Ошибка получения расписаний!",
       };
       return res.status(500).json(resBody);
     }
@@ -53,12 +76,31 @@ const scheduleController = {
         throw error;
       });
 
+      const slotsData = await Slot.find({ scheduleId }).catch((erorr) => {
+        throw erorr;
+      });
+
+      const slots = slotsData.map((s) => {
+        const { teacherId, groupId, subjectId, lessonNumber, weekDayNumber, _id } = s;
+
+        return {
+          id: _id,
+          teacherId,
+          groupId,
+          subjectId,
+          lessonNumber,
+          weekDayNumber,
+        };
+      });
+
+      console.log(scheduleData.name);
+
       const resBody = {
         id: scheduleData._id,
         name: scheduleData.name,
-        content: scheduleData.content,
         groupId: scheduleData.groupId,
         message: "Расписание найдено",
+        slots,
       };
       return res.status(200).json(resBody);
     } catch (error) {

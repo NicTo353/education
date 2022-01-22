@@ -1,8 +1,8 @@
 import Title from "antd/lib/typography/Title";
 import React from "react";
-import ScheduleSlot from "./ScheduleSlot/ScheduleSlot";
+import ScheduleSlotForm from "./ScheduleSlotForm/ScheduleSlotForm";
 
-const ScheduleDay = (props) => {
+const ScheduleDayForm = (props) => {
   const { day, slots, teachers, subjects, changeSlotField } = props;
   return (
     <div>
@@ -10,12 +10,12 @@ const ScheduleDay = (props) => {
 
       {slots.map((s) => {
         return (
-          <ScheduleSlot
+          <ScheduleSlotForm
             changeField={changeSlotField}
             key={s.lessonNumber}
             teachers={teachers}
             subjects={subjects}
-            {...s}
+            {...s}  
           />
         );
       })}
@@ -23,4 +23,4 @@ const ScheduleDay = (props) => {
   );
 };
 
-export default ScheduleDay;
+export default ScheduleDayForm;
