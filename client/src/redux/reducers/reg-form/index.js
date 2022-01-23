@@ -6,6 +6,7 @@ const initialState = {
   name: "",
   surname: "",
   parentName: "",
+  isDean: true,
 
   message: "",
 };

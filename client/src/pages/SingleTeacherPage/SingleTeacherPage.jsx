@@ -9,7 +9,7 @@ const SingleTeacherPage = (props) => {
 
   const { teacherId } = useParams();
 
-  console.log(teachers)
+  console.log(teachers);
   const daysElements = [];
 
   const teacher = teachers.find((t) => t.id === teacherId);
@@ -49,14 +49,32 @@ const SingleTeacherPage = (props) => {
   }, [update]);
 
   return (
-    <div style={{maxWidth: "800px", padding: "20px", backgroundColor: "#fff", border: "1px solid #000"}}>
-      <Title>
-        {name} {surname} {parentName}
-      </Title>
+    <div
+      style={{
+        minHeight: "80vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "800px",
+          width: '100%',
+          padding: "20px",
+          backgroundColor: "#fff",
+          border: "1px solid #c4c4c4",
+          borderRadius: "10px"
+        }}
+      >
+        <Title>
+          {surname} {name} {parentName}
+        </Title>
 
-      <Title level={2}>Должность: {role === "DEAN" ? "декан" : "учитель"}</Title>
+        <Title level={2}>Должность: {role === "DEAN" ? "декан" : "учитель"}</Title>
 
-      {daysElements}
+        {daysElements}
+      </div>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { Select } from "antd";
+import Item from "antd/lib/form/FormItem";
 import React from "react";
 
 const ScheduleSlotForm = (props) => {
@@ -13,6 +14,12 @@ const ScheduleSlotForm = (props) => {
     changeField,
   } = props;
 
+  const freeTeachers = teachers.filter((t) => {
+    const slot = t.slots.find((s) => s.weekDayNumber === weekDayNumber && s.lessonNumber === lessonNumber);
+
+    return !slot;
+  });
+
   const teacherSelectHandler = (value) => {
     changeField({ name: "teacherId", lessonNumber, weekDayNumber, value });
   };
@@ -21,7 +28,9 @@ const ScheduleSlotForm = (props) => {
     changeField({ name: "subjectId", lessonNumber, weekDayNumber, value });
   };
 
-  const teachersOptions = teachers.map((t) => {
+
+
+  const teachersOptions = freeTeachers.map((t) => {
     return (
       <Select.Option key={t.id} value={t.id}>
         {t.surname} {t.name} {t.parentName}
@@ -41,36 +50,48 @@ const ScheduleSlotForm = (props) => {
       style={{
         display: "flex",
         justifyContent: "space-between",
-        alignItems: "center",
         marginBottom: "10px",
       }}
     >
-      <div style={{ flex: "0 0 auto", minWidth: "20px" }}>{lessonNumber})</div>
+      <div style={{ flex: "0 0 auto", minWidth: "20px", paddingTop: "5px" }}>{lessonNumber})</div>
 
-      <div style={{ flex: "0 0 auto", minWidth: "50px" }}>{time}</div>
+      <div style={{ flex: "0 0 auto", minWidth: "50px", paddingTop: "5px" }}>{time}</div>
 
       <div style={{ flex: "1 0 33%", padding: "0 10px" }}>
-        <Select
-          value={teacherId}
-          onChange={teacherSelectHandler}
-          placeholder="Выберите учителя"
-          style={{ width: "100%" }}
+        <Item
+          name={"subject" + weekDayNumber + lessonNumber}
+          rules={[{ required: !!subjectId, message: "Выберите предмет" }]}
+          style={{ display: "flex", alignItems: "center" }}
         >
-          <Select.Option value={null}></Select.Option>
-          {teachersOptions}
-        </Select>
+          <Select
+            required={subjectId}
+            value={teacherId}
+            onChange={teacherSelectHandler}
+            placeholder="Выберите учителя"
+            style={{ width: "100%" }}
+          >
+            <Select.Option value={null}></Select.Option>
+            {teachersOptions}
+          </Select>
+        </Item>
       </div>
 
       <div style={{ flex: "1 0 33%", padding: "0 10px" }}>
-        <Select
-          value={subjectId}
-          onChange={subjectSelectHandler}
-          placeholder="Выберите предмет"
-          style={{ width: "100%" }}
+        <Item
+          name={"teacher" + weekDayNumber + lessonNumber}
+          rules={[{ required: !!teacherId, message: "Выберите предмет" }]}
+          style={{ display: "flex", alignItems: "center" }}
         >
-          <Select.Option value={null}></Select.Option>
-          {subjectsOptions}
-        </Select>
+          <Select
+            value={subjectId}
+            onChange={subjectSelectHandler}
+            placeholder="Выберите предмет"
+            style={{ width: "100%" }}
+          >
+            <Select.Option value={null}></Select.Option>
+            {subjectsOptions}
+          </Select>
+        </Item>
       </div>
     </div>
   );

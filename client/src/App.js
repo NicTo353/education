@@ -1,10 +1,10 @@
 import Layout, { Content, Header } from "antd/lib/layout/layout";
 import AppRouter from "./components/AppRouter/AppRouter";
-import Nav from "./components/Nav/Nav";
 import "./App.css";
 import React from "react";
 import store from "./redux";
 import AppContext from "./context";
+import NavContainer from "./components/Nav/NavContainer";
 
 function App() {
   const state = store.getState();
@@ -20,7 +20,7 @@ function App() {
       <AppContext.Provider value={contextValue}>
         <Layout hasSider={false}>
           <Header>
-            <Nav />
+            <NavContainer />
           </Header>
           <Content className="content-wrapper">
             <AppRouter />

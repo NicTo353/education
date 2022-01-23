@@ -18,7 +18,7 @@ const AddScheduleForm = (props) => {
     changeSlotField,
     changeField,
     submit,
-    update
+    update,
   } = props;
 
   useEffect(() => {
@@ -59,59 +59,74 @@ const AddScheduleForm = (props) => {
   });
 
   return (
-    <div style={{ borderTop: "1px solid #000", marginTop: "100px" }}>
-      <Form
-        onFinish={() => {
-          submit({ slots, name, groupId });
-        }}
-        style={{
-          maxWidth: "800px",
-          margin: "0 auto",
-          padding: "10px",
-        }}
-      >
-        <Title style={{ textAlign: "center" }} level={2}>
-          Добавление расписания
-        </Title>
+    <div
+      style={{
+        minHeight: "80vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        borderTop: "1px solid #c4c4c4",
+        marginTop: "100px",
+        paddingTop: "50px"
+      }}
+    >
 
-        <div
+      <div style={{ border: "1px solid #c4c4c4", padding: "10px", borderRadius: "10px",  maxWidth: "800px", width: "100%",  }}>
+        <Form
+          onFinish={() => {
+            submit({ slots, name, groupId });
+          }}
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            gap: "10px",
-            paddingRight: "10px",
+            maxWidth: "800px",
+            margin: "0 auto",
+            padding: "10px",
           }}
         >
-          <Input
-            required
-            name="name"
-            value={name}
-            onChange={(event) => {
-              changeField({ value: event.target.value, name: event.target.name });
-            }}
-            placeholder="Введите название расписания"
-          />
-          <Select
-            required
-            value={groupId}
-            onChange={(value) => changeField({ name: "groupId", value })}
-            placeholder="Выберите группу из списка"
-            style={{ flex: "0 0 50%" }}
-          >
-            {groupsOptions}
-          </Select>
-        </div>
+          <Title style={{ textAlign: "center", marginBottom: "30px" }} level={2}>
+            Добавление расписания
+          </Title>
 
-        {daysElements}
-        <div style={{ textAlign: "center", marginTop: "30px" }}>
-          <Button style={{ marginRight: "20px" }} htmlType="submit" type="primary">
-            Создать
-          </Button>
-          <Button onClick={reset} type="ghost" htmlType="reset">
-            Очистить
-          </Button>
-        </div>
-      </Form>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              gap: "10px",
+              paddingRight: "10px",
+              marginBottom: "30px",
+            }}
+          >
+            <Input
+              required
+              name="name"
+              value={name}
+              onChange={(event) => {
+                changeField({ value: event.target.value, name: event.target.name });
+              }}
+              placeholder="Введите название расписания"
+            />
+            <Select
+              required
+              value={groupId}
+              onChange={(value) => changeField({ name: "groupId", value })}
+              placeholder="Выберите группу из списка"
+              style={{ flex: "0 0 50%" }}
+            >
+              {groupsOptions}
+            </Select>
+          </div>
+
+          {daysElements}
+          <div style={{ textAlign: "center", marginTop: "30px" }}>
+            <Button style={{ marginRight: "20px" }} htmlType="submit" type="primary">
+              Создать
+            </Button>
+            <Button onClick={reset} type="ghost" htmlType="reset">
+              Очистить
+            </Button>
+          </div>
+        </Form>
+      </div>
     </div>
   );
 };

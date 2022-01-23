@@ -51,6 +51,7 @@ export const thunks = {
   forgetUser: () => (dispatch) => {
     dispatch(allActionCreators.clearUserData());
     localStorage.removeItem("userData");
+    window.location.reload();
   },
 
   updateTeachers: () => async (dispatch) => {
@@ -149,4 +150,25 @@ export const thunks = {
         console.log(error);
       });
   },
+
+  submitAddTeacherForm:
+    ({ email, password, name, surname, parentName, isDean }) =>
+    async (dispatch) => {
+      const role = isDean ? "DEAN" : "TEACHER";
+
+      return API.createTeacher({ email, password, name, surname, parentName, role })
+        .then((res) => {
+          dispatch(thunks.updateTeachers());
+          dispatch(allActionCreators.clearRegForm());
+        })
+        .catch((error) => {
+          console.log(error);
+          const message = error.response.data.message;
+          if (message) {
+            dispatch(allActionCreators.setRegFormMessage(message));
+          } else {
+            dispatch(allActionCreators.setRegFormMessage("Ошибка!"));
+          }
+        });
+    },
 };

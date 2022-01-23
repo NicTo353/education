@@ -1,6 +1,8 @@
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import Title from "antd/lib/typography/Title";
-import { useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import AddTeacherFormContainer from "../../components/AddTeacherForm/AddTeacherFormContainer";
+import AppContext from "../../context";
 
 const TeachersPage = (props) => {
   const { teachers, update } = props;
@@ -8,6 +10,10 @@ const TeachersPage = (props) => {
   useEffect(() => {
     update();
   }, [update]);
+
+  const { role } = useContext(AppContext);
+
+  const [isAddTeacherFormVisible, setIsAddTeacherFormVisible] = useState(false);
 
   const dataSource = teachers.map((t, index) => {
     return {
@@ -49,6 +55,19 @@ const TeachersPage = (props) => {
     <>
       <Title style={{ textAlign: "center", marginBottom: "40px" }}>Учителя</Title>
       <Table dataSource={dataSource} columns={columns} />
+
+      {role !== "DEAN" ? null : (
+        <>
+          <Button
+            onClick={() => {
+              setIsAddTeacherFormVisible(!isAddTeacherFormVisible);
+            }}
+          >
+            {isAddTeacherFormVisible ? "Отменить добавление учителя" : "Добавить учителя"}
+          </Button>
+          {!isAddTeacherFormVisible ? null : <AddTeacherFormContainer />}
+        </>
+      )}
     </>
   );
 };

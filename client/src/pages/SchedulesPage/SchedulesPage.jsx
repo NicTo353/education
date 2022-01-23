@@ -22,7 +22,8 @@ const SchedulesPage = (props) => {
           padding: "20px",
           minHeight: "200px",
           flex: "0 0 300px",
-          border: "1px solid #000",
+          border: "1px solid #c4c4c4",
+          borderRadius: "10px"
         }}
         to={`/schedule/${s.id}`}
       >

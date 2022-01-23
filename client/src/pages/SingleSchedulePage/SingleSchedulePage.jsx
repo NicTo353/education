@@ -49,18 +49,29 @@ const SingleSchedulePage = (props) => {
   return (
     <div
       style={{
-        maxWidth: "800px",
-        margin: "0 auto",
-        backgroundColor: "#fff",
-        padding: "20px",
-        border: "1px solid #000",
+        minHeight: "80vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <Title>
-        {name} {findGroupName()}
-      </Title>
+      <div
+        style={{
+          maxWidth: "800px",
+          width: "100%",
+          margin: "0 auto",
+          backgroundColor: "#fff",
+          padding: "20px",
+          border: "1px solid #c4c4c4",
+          borderRadius: "10px"
+        }}
+      >
+        <Title>
+          {name} {findGroupName()}
+        </Title>
 
-      {daysElements}
+        {daysElements}
+      </div>
     </div>
   );
 };

@@ -1,5 +1,7 @@
 const Teacher = require("../models/Teacher");
 const Slot = require("../models/Slot");
+const { validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs/dist/bcrypt");
 
 const teacherController = {
   async create(req, res) {
@@ -12,31 +14,36 @@ const teacherController = {
         });
       }
 
+      console.log(req.body);
+
       const { email, password, name, surname, parentName, role } = req.body;
       const candidate = await Teacher.findOne({ email });
       if (candidate) {
         return res.status(400).json({ message: "Email уже зарегистрирован" });
       }
 
-      if (role !== "DEAN" || role !== "TEACHER") {
-        return res.status(400).json({ message: "No such role" });
+      if (role !== "DEAN" && role !== "TEACHER") {
+        return res.status(400).json({ message: "Нет такой роли!" });
       }
 
       const hashedPassword = bcrypt.hashSync(password, 7);
-      const teacher = new Teacher({
+      const teacher = await new Teacher({
         email,
         name,
         parentName,
         surname,
         role,
         password: hashedPassword,
+      })
+      
+      await teacher.save().catch((error) => {
+        throw error;
       });
-      await teacher.save();
 
-      return res.status(200).json({ message: "Teacher registered successfully" });
+      return res.status(200).json({ message: "Учитель успешно зарегистрирован!" });
     } catch (error) {
       console.log(error);
-      return res.status(400).json({ message: error });
+      return res.status(500).json({ message: "Ошибка!" });
     }
   },
 
