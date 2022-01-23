@@ -7,10 +7,6 @@ const schema = new Schema({
     unique: true,
   },
 
-  course: {
-    type: Number,
-    required: true,
-  },
 });
 
 module.exports = model("Group", schema);
