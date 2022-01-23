@@ -9,6 +9,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   update: thunks.updateSchedules,
+  deleteOne: thunks.deleteSchedule,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SchedulesPage);

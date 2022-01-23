@@ -19,6 +19,7 @@ const AddScheduleForm = (props) => {
     changeField,
     submit,
     update,
+    closeForm,
   } = props;
 
   useEffect(() => {
@@ -68,14 +69,22 @@ const AddScheduleForm = (props) => {
         alignItems: "center",
         borderTop: "1px solid #c4c4c4",
         marginTop: "100px",
-        paddingTop: "50px"
+        paddingTop: "50px",
       }}
     >
-
-      <div style={{ border: "1px solid #c4c4c4", padding: "10px", borderRadius: "10px",  maxWidth: "800px", width: "100%",  }}>
+      <div
+        style={{
+          border: "1px solid #c4c4c4",
+          padding: "10px",
+          borderRadius: "10px",
+          maxWidth: "800px",
+          width: "100%",
+        }}
+      >
         <Form
           onFinish={() => {
             submit({ slots, name, groupId });
+            closeForm();
           }}
           style={{
             maxWidth: "800px",

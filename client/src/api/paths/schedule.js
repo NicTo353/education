@@ -8,6 +8,10 @@ const scheduleAPI = {
   getSchedules: (id = "") => {
     return axiosInstance.get(`/schedule/${id}/`);
   },
+
+  deleteSchedule: ((id = "") => {
+    return axiosInstance.delete(`/schedule/${id}`)
+  })
 };
 
 export default scheduleAPI;

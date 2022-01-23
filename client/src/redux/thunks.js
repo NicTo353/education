@@ -171,4 +171,23 @@ export const thunks = {
           }
         });
     },
+
+  deleteTeacher: (teacherId) => async (dispatch) => {
+    return API.deleteTeacher(teacherId)
+      .then((res) => {
+        dispatch(thunks.updateTeachers());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  deleteSchedule: (scheduleId) => async (dispatch) => {
+    return API.deleteSchedule(scheduleId).then((res) => {
+      dispatch(thunks.updateSchedules());
+      dispatch(thunks.updateTeachers()).catch((error) => {
+        console.log(error);
+      });
+    });
+  },
 };

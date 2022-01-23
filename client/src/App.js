@@ -12,6 +12,7 @@ function App() {
   const contextValue = {
     token: state.user.token,
     role: state.user.role,
+    userId: state.user.id,
     isFetching: state.data.isFetching,
   };
 

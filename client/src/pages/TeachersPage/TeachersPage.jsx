@@ -5,13 +5,13 @@ import AddTeacherFormContainer from "../../components/AddTeacherForm/AddTeacherF
 import AppContext from "../../context";
 
 const TeachersPage = (props) => {
-  const { teachers, update } = props;
+  const { teachers, update, deleteOne } = props;
 
   useEffect(() => {
     update();
   }, [update]);
 
-  const { role } = useContext(AppContext);
+  const { role, userId } = useContext(AppContext);
 
   const [isAddTeacherFormVisible, setIsAddTeacherFormVisible] = useState(false);
 
@@ -48,6 +48,28 @@ const TeachersPage = (props) => {
       title: "Email",
       dataIndex: "email",
       key: "email",
+    },
+
+    {
+      title: "Действия",
+      dataIndex: "",
+      key: "id",
+      render: (column) => {
+        if (column.id === userId) {
+          return;
+        }
+
+        return (
+          <Button
+            type="danger"
+            onClick={() => {
+              deleteOne(column.id);
+            }}
+          >
+            Удалить
+          </Button>
+        );
+      },
     },
   ];
 
