@@ -206,7 +206,27 @@ export const thunks = {
     return API.createSubject(subjectName)
       .then((res) => {
         dispatch(thunks.updateSubjects());
-        dispatch(thunks.updateSchedules());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  createGroup: (groupName) => async (dispatch) => {
+    return API.createGroup(groupName)
+      .then((res) => {
+        dispatch(thunks.updateGroups());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  deleteGroup: (id) => async (dispatch) => {
+    console.log(id)
+    return API.deleteGroup(id)
+      .then((res) => {
+        dispatch(thunks.updateGroups());
       })
       .catch((error) => {
         console.log(error);

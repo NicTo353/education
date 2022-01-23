@@ -8,6 +8,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = {
   update: thunks.updateGroups,
+  deleteOne: thunks.deleteGroup,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupsPage);
