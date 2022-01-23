@@ -100,10 +100,10 @@ export const thunks = {
         return res.data;
       })
       .catch((error) => {
-        console.log(error.response);
         if (error.response.status === 403) {
           dispatch(thunks.forgetUser());
         }
+        console.log(error);
       });
   },
 
@@ -143,7 +143,6 @@ export const thunks = {
   updateSingleSchedulePageSlots: (scheduleId) => async (dispatch) => {
     return API.getSchedules(scheduleId)
       .then((res) => {
-        console.log(res.data, "data");
         dispatch(allActionCreators.setSingleScheduleData(res.data));
       })
       .catch((error) => {
@@ -183,11 +182,34 @@ export const thunks = {
   },
 
   deleteSchedule: (scheduleId) => async (dispatch) => {
-    return API.deleteSchedule(scheduleId).then((res) => {
-      dispatch(thunks.updateSchedules());
-      dispatch(thunks.updateTeachers()).catch((error) => {
+    return API.deleteSchedule(scheduleId)
+      .then((res) => {
+        dispatch(thunks.updateSchedules());
+        dispatch(thunks.updateTeachers());
+      })
+      .catch((error) => {
         console.log(error);
       });
-    });
+  },
+
+  deleteSubject: (subjectId) => async (dispatch) => {
+    return API.deleteSubject(subjectId)
+      .then((res) => {
+        dispatch(thunks.updateSubjects());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  },
+
+  createSubject: (subjectName) => async (dispatch) => {
+    return API.createSubject(subjectName)
+      .then((res) => {
+        dispatch(thunks.updateSubjects());
+        dispatch(thunks.updateSchedules());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };

@@ -6,19 +6,14 @@ const ScheduleDay = (props) => {
   const { day, slots, teachers, subjects, lessonsTime } = props;
 
   function findSubjectName(subjectId) {
-    if (subjects.length && subjectId) {
-      return subjects.find((s) => s.id === subjectId).name;
-    }
-    return "";
+    const subject = subjects.find((s) => s.id === subjectId);
+    return subject ? subject.name : "";
   }
 
   function findTeacherFullName(teacherId) {
-    if (teachers.length && teacherId) {
-      const teacher = teachers.find((t) => t.id === teacherId);
+    const teacher = teachers.find((t) => t.id === teacherId);
 
-      return `${teacher.surname} ${teacher.name} ${teacher.parentName}`;
-    }
-    return "";
+    return teacher ? `${teacher.surname} ${teacher.name} ${teacher.parentName}` : "";
   }
 
   const dataSource = slots.map((s) => {

@@ -49,8 +49,10 @@ const TeachersPage = (props) => {
       dataIndex: "email",
       key: "email",
     },
+  ];
 
-    {
+  if (role === "DEAN") {
+    columns.push({
       title: "Действия",
       dataIndex: "",
       key: "id",
@@ -70,8 +72,8 @@ const TeachersPage = (props) => {
           </Button>
         );
       },
-    },
-  ];
+    });
+  }
 
   return (
     <>

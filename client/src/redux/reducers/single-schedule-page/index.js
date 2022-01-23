@@ -9,7 +9,6 @@ const initialState = {
 function singleSchedulePageReducer(state = initialState, action) {
   switch (action.type) {
     case SingleSchedulePageActionNames.SET_SINGLE_SCHEDULE_DATA:
-      console.log(action.payload);
       return {
         ...state,
         ...action.payload,

@@ -9,7 +9,6 @@ const SingleTeacherPage = (props) => {
 
   const { teacherId } = useParams();
 
-  console.log(teachers);
   const daysElements = [];
 
   const teacher = teachers.find((t) => t.id === teacherId);

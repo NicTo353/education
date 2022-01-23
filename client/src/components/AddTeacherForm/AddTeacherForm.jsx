@@ -7,19 +7,8 @@ import AppContext from "../../context";
 import Checkbox from "antd/lib/checkbox/Checkbox";
 
 const AddTeacherForm = (props) => {
-  const {
-    email,
-    password,
-    name,
-    surname,
-    parentName,
-    clear,
-    changeField,
-    submit,
-    message,
-    title,
-    isDean,
-  } = props;
+  const { email, password, name, surname, parentName, clear, changeField, submit, title, isDean } =
+    props;
 
   const { role } = useContext(AppContext);
 
@@ -53,15 +42,12 @@ const AddTeacherForm = (props) => {
       <Title span={10} style={{ textAlign: "center" }}>
         {title}
       </Title>
-      <Title level={3} style={{ textAlign: "center", color: "red" }}>
-        {/* {message} */}
-      </Title>
 
       <Form
         {...formItemLayout}
         name="reg"
         initialValues={{
-          remember: true,
+          remember: false,
         }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}

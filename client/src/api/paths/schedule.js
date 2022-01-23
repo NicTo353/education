@@ -9,7 +9,7 @@ const scheduleAPI = {
     return axiosInstance.get(`/schedule/${id}/`);
   },
 
-  deleteSchedule: ((id = "") => {
+  deleteSchedule: ((id) => {
     return axiosInstance.delete(`/schedule/${id}`)
   })
 };

@@ -1,4 +1,3 @@
-import Paragraph from "antd/lib/typography/Paragraph";
 import Title from "antd/lib/typography/Title";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
