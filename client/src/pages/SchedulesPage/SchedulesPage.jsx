@@ -5,7 +5,7 @@ import AddScheduleFormContainer from "../../components/AddScheduleForm/AddSchedu
 import AppContext from "../../context";
 
 const SchedulesPage = (props) => {
-  const { update, schedules } = props;
+  const { update, schedules, userId } = props;
   const { role } = useContext(AppContext);
   const [isAddScheduleFormVisible, setIsAddScheduleFormVisible] = useState(false);
 
@@ -36,6 +36,7 @@ const SchedulesPage = (props) => {
       <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", marginBottom: "100px" }}>
         {scheduleCards}
       </div>
+      <Link to={`/teacher/${userId}`} style={{marginRight: "20px"}}>Мое расписание</Link>
 
       {role !== "DEAN" ? null : (
         <>

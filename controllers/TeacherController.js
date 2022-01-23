@@ -1,4 +1,5 @@
 const Teacher = require("../models/Teacher");
+const Slot = require("../models/Slot");
 
 const teacherController = {
   async create(req, res) {
@@ -44,6 +45,26 @@ const teacherController = {
       const teachers = await Teacher.find().catch((error) => {
         throw error;
       });
+      const teacherIdArr = teachers.map((t) => {
+        return t._id;
+      });
+
+      const slotsData = await Slot.find({ teacherId: teacherIdArr }).catch((error) => {
+        throw error;
+      });
+
+      const slots = slotsData.map((s) => {
+        const { _id, groupId, scheduleId, teacherId, lessonNumber, weekDayNumber, subjectId } = s;
+        return {
+          id: _id,
+          groupId,
+          scheduleId,
+          teacherId,
+          lessonNumber,
+          weekDayNumber,
+          subjectId,
+        };
+      });
 
       const resBody = teachers.map((t) => {
         return {
@@ -53,6 +74,9 @@ const teacherController = {
           parentName: t.parentName,
           email: t.email,
           role: t.role === "DEAN" ? "DEAN" : "TEACHER",
+          slots: slots.filter((s) => {
+            return s.teacherId.equals(t._id);
+          }),
         };
       });
 

@@ -47,7 +47,7 @@ const ScheduleDay = (props) => {
 
   return (
     <div style={{ marginBottom: "30px" }}>
-      <Title level={2}>{day}</Title>
+      <Title level={3}>{day}</Title>
       <Table showHeader={false} dataSource={dataSource} columns={columns} pagination={false} />
     </div>
   );

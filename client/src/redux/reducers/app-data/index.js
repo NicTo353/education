@@ -1,6 +1,8 @@
 const { AppDataActionTypes } = require("./actions");
 
 const initialState = {
+  dayNames: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница"],
+  lessonsTime: ["9:00", "10:45", "12:30", "14:15", "16:00"],
   teachers: [],
   students: [],
   subjects: [],
@@ -43,8 +45,8 @@ function appDataReducer(state = initialState, action) {
     case AppDataActionTypes.SET_SCHEDULES:
       return {
         ...state,
-        schedules: action.payload.schedules
-      }
+        schedules: action.payload.schedules,
+      };
 
     default:
       return state;
