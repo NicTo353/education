@@ -15,9 +15,6 @@ const Nav = (props) => {
       <Menu theme="dark" mode="horizontal">
         {role ? (
           <>
-            <Menu.Item key={RouteNames.STUDENTS}>
-              <Link to={RouteNames.STUDENTS}>Студенты</Link>
-            </Menu.Item>
             <Menu.Item key={RouteNames.TEACHERS}>
               <Link to={RouteNames.TEACHERS}>Учителя</Link>
             </Menu.Item>

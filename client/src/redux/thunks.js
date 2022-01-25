@@ -80,19 +80,6 @@ export const thunks = {
       });
   },
 
-  updateStudents: () => async (dispatch) => {
-    return API.getStudents()
-      .then((res) => {
-        dispatch(allActionCreators.setStudents(res.data));
-      })
-      .catch((error) => {
-        console.log(error);
-        if (error.response.status === 403) {
-          dispatch(thunks.forgetUser());
-        }
-      });
-  },
-
   updateGroups: () => async (dispatch) => {
     return API.getGroups()
       .then((res) => {
@@ -120,7 +107,6 @@ export const thunks = {
   updateAll: () => async (dispatch) => {
     return Promise.all([
       dispatch(thunks.updateGroups()),
-      dispatch(thunks.updateStudents()),
       dispatch(thunks.updateSubjects()),
       dispatch(thunks.updateTeachers()),
     ]);

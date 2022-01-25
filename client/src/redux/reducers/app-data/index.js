@@ -4,7 +4,6 @@ const initialState = {
   dayNames: ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница"],
   lessonsTime: ["9:00", "10:45", "12:30", "14:15", "16:00"],
   teachers: [],
-  students: [],
   subjects: [],
   groups: [],
   schedules: [],
@@ -30,11 +29,7 @@ function appDataReducer(state = initialState, action) {
         subjects: action.payload.subjects,
       };
 
-    case AppDataActionTypes.SET_STUDENTS:
-      return {
-        ...state,
-        students: action.payload.students,
-      };
+
 
     case AppDataActionTypes.SET_GROUPS:
       return {
