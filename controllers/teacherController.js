@@ -34,8 +34,8 @@ const teacherController = {
         surname,
         role,
         password: hashedPassword,
-      })
-      
+      });
+
       await teacher.save().catch((error) => {
         throw error;
       });
@@ -129,6 +129,8 @@ const teacherController = {
       const result = await Teacher.findByIdAndRemove(teacherId).catch((error) => {
         throw error;
       });
+
+      await Slot.updateMany({ teacherId }, { teacherId: null, subjectId: null });
 
       const resBody = { ...result, message: "Учитель успешно удален" };
       return res.status(200).json(resBody);

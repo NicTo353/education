@@ -1,3 +1,4 @@
+const Slot = require("../models/Slot");
 const Subject = require("../models/Subject");
 
 const subjectController = {
@@ -78,6 +79,10 @@ const subjectController = {
     try {
       const subjectId = req.params.id;
       const result = await Subject.findByIdAndRemove(subjectId).catch((error) => {
+        throw error;
+      });
+
+      Slot.updateMany({ subjectId }, { subjectId: null, teacherId: null }).catch((error) => {
         throw error;
       });
 

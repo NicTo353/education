@@ -93,8 +93,6 @@ const scheduleController = {
         };
       });
 
-      console.log(scheduleData.name);
-
       const resBody = {
         id: scheduleData._id,
         name: scheduleData.name,
@@ -120,7 +118,11 @@ const scheduleController = {
         throw error;
       });
 
-      const resBody = { ...result, message: "Расписаниеа успешно удалено" };
+      await Slot.deleteMany({ scheduleId }).catch((error) => {
+        throw error;
+      });
+
+      const resBody = { ...result, message: "Расписание успешно удалено" };
       return res.status(200).json(resBody);
     } catch (error) {
       console.log(error, "");

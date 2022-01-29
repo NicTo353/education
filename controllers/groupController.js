@@ -1,4 +1,6 @@
+const Slot = require("../models/Slot");
 const Group = require("../models/Group");
+const Schedule = require("../models/Schedule");
 
 const groupController = {
   async create(req, res) {
@@ -30,18 +32,20 @@ const groupController = {
 
   async getAll(req, res) {
     try {
-      const resBody = await Group.find().then(data => {
-        return data.map(g => {
-          const {name, _id, course} = g
-          return {
-            name,
-            course,
-            id: _id
-          }
+      const resBody = await Group.find()
+        .then((data) => {
+          return data.map((g) => {
+            const { name, _id, course } = g;
+            return {
+              name,
+              course,
+              id: _id,
+            };
+          });
         })
-      }).catch((error) => {
-        throw error;
-      });
+        .catch((error) => {
+          throw error;
+        });
 
       return res.status(200).json(resBody);
     } catch (error) {
@@ -82,6 +86,14 @@ const groupController = {
     try {
       const groupId = req.params.id;
       const result = await Group.findByIdAndRemove(groupId).catch((error) => {
+        throw error;
+      });
+
+      await Schedule.findOneAndDelete({ groupId }).catch((error) => {
+        throw error;
+      });
+
+      await Slot.deleteMany({ groupId }).catch((error) => {
         throw error;
       });
 

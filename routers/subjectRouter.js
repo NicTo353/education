@@ -1,5 +1,5 @@
 const express = require("express");
-const controller = require("../controllers/SubjectController");
+const controller = require("../controllers/subjectController");
 const authMiddleware = require("../middleware/authMiddleware");
 const isDeanMiddleware = require("../middleware/isDeanMiddleware");
 
